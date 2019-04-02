@@ -7,35 +7,6 @@ set -o nounset
 set -o errexit
 set -x
 
-# Either from lat/lon from Hadisst
-#filein=${TECLIM_CLIMATE_DATA}/obs/ice/siconc/ukmo/hadisst1/processed/native/siconc_SImon_ukmo_HadISST1_r1i1p1_187001-201805_reg1.0.nc
-#rootout=${TECLIM_CLIMATE_DATA}/obs/ice/siconc/ukmo/hadisst1/processed/interp/
-#mkdir -p $rootout
-## choose/make the grid to remap to (1*1)
-#ncrename -v latitude,lat $filein
-#ncrename -v longitude,lon $filein
-#grid=np.meshgrid(lon, lat)
-# perform remap
-#cdo -P 8 remapbil,grid $filein regridded
-#rm -f filein lat lon
-#ncrcat -F regridded.nc ${rootout}/siconc_SImon_ukmo_HadISST1_r1i1p1_187001-201805_reg1.0.nc
-
-# 180x360 (1x1 degree) Equi-Angular grid, first longitude west edge at Greenwich
-#ncks --rgr ttl='Equi-Angular grid 180x360'#latlon=180,360#lat_typ=uni#lon_typ=grn_ctr \
-#     --rgr scrip=${TECLIM_CLIMATE_DATA}/tools/180_360_20181119.nc $filein ${TECLIM_CLIMATE_DATA}/tools/180_360_20181119.nc
-#grid=${TECLIM_CLIMATE_DATA}/tools/180_360_20181119.nc
-
-# 180x360 (1x1 degree) Equi-Angular grid
-#cat > mygrid << EOF
-#gridtype = lonlat
-#xsize    = 360
-#ysize    = 180
-#xfirst   = −179.5
-#xinc     = 1
-#yfirst   = -89.5
-#yinc     = 1
-#EOF
-
 # NSIDC0051 - NH
 filein=${TECLIM_CLIMATE_DATA}/obs/ice/siconc/NSIDC/NSIDC-0051/processed/native/siconc_r1i1p1_mon_197901-201712_nh-psn25.nc
 rootout=${TECLIM_CLIMATE_DATA}/obs/ice/siconc/NSIDC/NSIDC-0051/processed/interp/
