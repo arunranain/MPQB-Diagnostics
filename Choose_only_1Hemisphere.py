@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# Calculate hadisst areacello
+# Choose only 1 hemisphere in case of global data
 # Arun Rana
 #
 import netCDF4
