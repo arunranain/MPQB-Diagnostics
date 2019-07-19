@@ -127,3 +127,20 @@ for dsa,dsb in comparisons:
         plt.savefig(savename)
     else:
         pass
+    
+    
+    
+#Copyright (C) 2019, Bas Crezee, ETH Zürich, Institut for Atmospheric and Climate Science
+#Distributed under GNU General Public License GPL-3.0
+#
+#This program is free software: you can redistribute it and/or modify it under the terms 
+#of the GNU General Public License as published by the Free Software Foundation, either 
+#version 3 of the License, or (at your option) any later version.
+#
+#This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+#without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
+#See the GNU General Public License for more details.
+# 
+#Please acknowledge ETH Zurich, Institute for Atmospheric and Climate Science, Bas Crezee in any further use of the software.#
+#
+#See https://www.gnu.org/licenses/
