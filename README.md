@@ -1,3 +1,25 @@
+# MPQB-Diagnostics Branch: basdev
+
+Installation
+------------
+ - clone this repository 
+ - clone the trend_lim_framework
+ - add the two local directories that correspond to the above repositories to your $PYTHONPATH
+
+Data preparation
+----------------
+ - regrid data to a common grid
+ - make the data adhere to custom MPQB naming conventions (this can be done on-the-fly in Python Xarray):
+   - latitude is named 'lat'
+   - longitude is named 'lon'
+   - time is named 'time'
+   - longitude ranges from -180;180 (other might work, not tested)
+
+MPQB
+----------------
+ - edit the parameters at the top of the script mpqb_mapplot.py
+ - run the script (install any missing libraries, ideally in a conda environment)
+
 # MPQB-Diagnostics
 Diagnostics for MPQB Evaluation on CDS
  
