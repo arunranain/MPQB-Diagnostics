@@ -17,8 +17,8 @@ Data preparation
 
 MPQB
 ----------------
- - edit the parameters at the top of the script mpqb_mapplot.py
- - run the script (install any missing libraries, ideally in a conda environment)
+ - edit the parameters at the top of the script mpqb_mapplots.py
+ - run mpqb_mapplots.py (install any missing packages, ideally in a conda environment)
 
 # MPQB-Diagnostics
 Diagnostics for MPQB Evaluation on CDS
