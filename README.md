@@ -1,7 +1,7 @@
 # MPQB-Diagnostics
 Diagnostics for MPQB Evaluation on CDS
  
-The following scripts are meant for MPQB Diagnostics and plotting.
+MPQB_v0.1.py - The following scripts are meant for MPQB Diagnostics and plotting.
 The main script (after remapping all the datasets) has been divided into 2 parts i.e spatial comparison diagnostics (averaged over time length) and temporal comparison diagnostics (averagered over space).
 The below space is used to define what/where you as ECV evaluator has to change in order to run it for your ECV.
 The following should be modified according to needs of your ECV:
