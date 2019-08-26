@@ -44,6 +44,15 @@ def mpqb_reldiff(da1,da2):
     reldiff_da.attrs['datasetname'] = da1.attrs['datasetname']+'-'+da2.attrs['datasetname']
     return reldiff_da
 
+def mpqb_mankendall(da):
+    mk = parallel_apply_along_axis(mannkendall1d,0,da.values)
+    template = da[0:1].mean('time')
+    mk_da = template.copy()
+    mk_da.values = mk
+    mk_da.name = 'Mann-Kendall test on '+mk_da.name
+    mk_da.attrs['datasetname'] = da.attrs['datasetname']
+    return mk_da
+
 def mpqb_plot(dataset,cmaptype='values',robust=True,**kwargs):
     # Get right cmap
     # This is quite an ugly implementation, but it works.
@@ -63,7 +72,8 @@ def mpqb_plot(dataset,cmaptype='values',robust=True,**kwargs):
     ax = fig.add_subplot(111, projection=ccrs.Robinson())
     dataset.plot(ax=ax, transform=ccrs.PlateCarree(),robust=robust,cmap=mpqbcmap,**kwargs)
     ax.coastlines()
-    plt.title(dataset.attrs['datasetname'])
+    if 'datasetname' in dataset.attrs:
+        plt.title(dataset.attrs['datasetname'])
     
     
 
