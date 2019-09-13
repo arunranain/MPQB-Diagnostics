@@ -9,6 +9,7 @@ The below space is used to define what/where you as ECV evaluator has to change 
 
 1. Install skill_metrics module - $ pip install SkillMetrics
 2. Input Data Information - provide links to your datasets that are interpolated with "Remap_v0.bash" or similar. You need to define Reference, Dataset1, Dataset2 and so on.
+P.S. - The script input data part assumes your variable is 3 dimensional (time, lat, lon) and not otherewise. If it is more than 3 dimension please collapse/squeeze against the dimension that leaves you with time/lat/lon.
 3. In all spatial plots please use your ECV specific/desired projection for mapping. In the following script we have used Mercator. Other Projection are listed and linked in documentation.
 4. I will leave other lat/lon information same unless compelling to keep the plots homogenised and same goes for filling continents and coastlines.
 5. In all spatial plots you need to adjust colormap according to ECV in cmap='yourcolor' in e.g. m.pcolormesh(lon, lat, PlotVariable,
@@ -23,6 +24,7 @@ The below space is used to define what/where you as ECV evaluator has to change 
 ## Import all required modules*******************************************************************************************************************************************************************
 import numpy as np
 from scipy.stats import pearsonr
+from scipy.stats.mstats import linregress
 import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
 plt.switch_backend('agg')
@@ -279,7 +281,8 @@ plt.close(fig)
 PlotVariable = np.zeros((Var1.shape[1], Var1.shape[2]))
 for n in range(Var1.shape[1]):
    for m in range(Var1.shape[2]):
-      PlotVariable[n, m] = np.polyfit(Var1[:,n,m],range(len(Var1[:,n,m])),0)
+      if np.sum(np.logical_not(np.isnan(conc[:,n,m])))>=2:
+         PlotVariable[n, m] = linregress(range(len(Var1[:,n,m])),Var1[:,n,m]).slope
 fig = plt.figure(figsize=(8, 6))
 plt.subplot(2,2,1)
 m = Basemap(projection='merc',llcrnrlat=-80,urcrnrlat=80,llcrnrlon=-180,urcrnrlon=180,lat_ts=20,resolution='c')
@@ -288,7 +291,7 @@ m.fillcontinents(color='gray')
 m.drawparallels(np.arange(-80.,81.,30.), labels=[1,0,0,0])
 m.drawmeridians(np.arange(-180.,181.,60.), labels=[0,0,0,1] )
 image2=m.pcolormesh(lon, lat, PlotVariable,
-             latlon=True, cmap='Reds')
+             latlon=True, cmap='RdBu')
 plt.clim(-1, 1)
 plt.title("YOUR_SUBPLOT_TITLE")
 del PlotVariable
@@ -296,7 +299,8 @@ del PlotVariable
 PlotVariable = np.zeros((Var2.shape[1], Var2.shape[2]))
 for n in range(Var2.shape[1]):
    for m in range(Var2.shape[2]):
-      PlotVariable[n, m] = np.polyfit(Var2[:,n,m],range(len(Var2[:,n,m])),0)
+      if np.sum(np.logical_not(np.isnan(conc[:,n,m])))>=2:
+         PlotVariable[n, m] = linregress(range(len(Var2[:,n,m])),Var2[:,n,m]).slope
 #fig = plt.figure(figsize=(8, 6))
 plt.subplot(2,2,2)
 m = Basemap(projection='merc',llcrnrlat=-80,urcrnrlat=80,llcrnrlon=-180,urcrnrlon=180,lat_ts=20,resolution='c')
@@ -305,7 +309,7 @@ m.fillcontinents(color='gray')
 m.drawparallels(np.arange(-80.,81.,30.), labels=[1,0,0,0])
 m.drawmeridians(np.arange(-180.,181.,60.), labels=[0,0,0,1] )
 m.pcolormesh(lon, lat, PlotVariable,
-             latlon=True, cmap='Reds')
+             latlon=True, cmap='RdBu')
 plt.clim(-1, 1)
 plt.title("YOUR_SUBPLOT_TITLE")
 del PlotVariable
@@ -313,7 +317,8 @@ del PlotVariable
 PlotVariable = np.zeros((Var3.shape[1], Var3.shape[2]))
 for n in range(Var3.shape[1]):
    for m in range(Var3.shape[2]):
-      PlotVariable[n, m] = np.polyfit(Var3[:,n,m],range(len(Var3[:,n,m])),0)
+      if np.sum(np.logical_not(np.isnan(conc[:,n,m])))>=2:
+         PlotVariable[n, m] = linregress(range(len(Var3[:,n,m])),Var3[:,n,m]).slope
 plt.subplot(2,2,3)
 m = Basemap(projection='merc',llcrnrlat=-80,urcrnrlat=80,llcrnrlon=-180,urcrnrlon=180,lat_ts=20,resolution='c')
 m.drawcoastlines(color='lightgray', linewidth=0.2)
@@ -321,7 +326,7 @@ m.fillcontinents(color='gray')
 m.drawparallels(np.arange(-80.,81.,30.), labels=[1,0,0,0])
 m.drawmeridians(np.arange(-180.,181.,60.), labels=[0,0,0,1] )
 m.pcolormesh(lon, lat, PlotVariable,
-             latlon=True, cmap='Reds')
+             latlon=True, cmap='RdBu')
 plt.clim(-1, 1)
 plt.title("YOUR_SUBPLOT_TITLE")
 del PlotVariable
@@ -329,7 +334,8 @@ del PlotVariable
 PlotVariable = np.zeros((VarRef.shape[1], VarRef.shape[2]))
 for n in range(VarRef.shape[1]):
    for m in range(VarRef.shape[2]):
-      PlotVariable[n, m] = np.polyfit(VarRef[:,n,m],range(len(VarRef[:,n,m])),0)
+      if np.sum(np.logical_not(np.isnan(conc[:,n,m])))>=2:
+         PlotVariable[n, m] = linregress(range(len(VarRef[:,n,m])),VarRef[:,n,m]).slope
 plt.subplot(2,2,4)
 m = Basemap(projection='merc',llcrnrlat=-80,urcrnrlat=80,llcrnrlon=-180,urcrnrlon=180,lat_ts=20,resolution='c')
 m.drawcoastlines(color='lightgray', linewidth=0.2)
@@ -337,7 +343,7 @@ m.fillcontinents(color='gray')
 m.drawparallels(np.arange(-80.,81.,30.), labels=[1,0,0,0])
 m.drawmeridians(np.arange(-180.,181.,60.), labels=[0,0,0,1] )
 image1=m.pcolormesh(lon, lat, PlotVariable,
-             latlon=True, cmap='Blues_r')
+             latlon=True, cmap='RdBu')
 plt.clim(-1, 1)
 plt.title("YOUR_SUBPLOT_TITLE")
 del PlotVariable
@@ -519,12 +525,12 @@ plt.close(fig)
 # Taylor Diagram ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 def load_obj(name):
     # Load object from file in pickle format
-    if version_info[0] == 2:
+    if version_info[0] == 3:
         suffix = 'pkl'
     else:
-        suffix = 'pkl3'
+        suffix = 'pkl2'
     with open(name + '.' + suffix, 'rb') as f:
-        return pickle.load(f) # Python2 succeeds
+        return pickle.load(f) # Python3 succeeds
 
 class Container(object): 
     
