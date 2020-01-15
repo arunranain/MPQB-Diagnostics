@@ -7,7 +7,8 @@
 # 13/09/2019 - Plynomial fit changed to Linregress (instead of polyfit)
 # 11/10/2019 - Projection changed to Robinson based on comment from Peter
 # 25/11/2019 - In trend section changed conc to Var1, Var2, Var3, and VarRef after comments from Yassmina
-# 25/11/2019 - in readme section below point 4, added changes that should be made to m.fillcontinents(color='gray') if it is land dataset after comments from Yassmina
+# 25/11/2019 - In readme section below point 4, added changes that should be made to m.fillcontinents(color='gray') if it is land dataset after comments from Yassmina
+# 15/01/2020 - DISCLAIMER - The lineplots/time-series do NOT include any area-weighting.
 """
 README:
 The following script is meant MPQB Diagnostics and plotting. It has been divided into 2 parts i.e spatial comparison diagnostics (averaged over time length) and temporal comparison diagnostics (averagered over space).
@@ -21,7 +22,7 @@ P.S. - The script input data part assumes your variable is 3 dimensional (time, 
 5. In all spatial plots you need to adjust colormap according to ECV in cmap='yourcolor' in e.g. m.pcolormesh(lon, lat, PlotVariable,
              latlon=True, cmap='Blues_r')
 6. Similarly you need to define the range for the displayed variable accoding to diagnostic presented by chnaging plt.clim range values in e.g. plt.clim(0, 100)
-7. Please defibne the subplot titles and plot tiles as per need and convinience in all the plots.
+7. Please define the subplot titles and plot tiles as per need and convinience in all the plots.
 8. Means and variability - Annual Mean - Position of the colorbar (cax1 = fig.add_axes([0.9, 0.2, 0.02, 0.6])) in the plot needs to be adjusted to linking and based on number of datasets in the plot.
 9. Means and variability - grid-point correlation (and in all futher spatial plots) - Both position of the colorbars need to be fixed based on the plot/datasets in cax1 and cax2.
 10. Time series of global/hemisphere annual/monthly mean (line plot) - Start and end year needs to be defined and changed. If daily dataset then we need to account for days as well. All the labels/titles/linecolor(ranges and position) needs to be defined.
